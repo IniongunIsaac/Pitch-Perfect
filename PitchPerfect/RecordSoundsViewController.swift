@@ -21,10 +21,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewDidLoad()
         stopRecordingButton.isEnabled = false
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
 
     @IBAction func recordAudio(_ sender: UIButton) {
         
@@ -55,22 +51,20 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     private func configureUI(_ isRecording: Bool) {
-        if isRecording {
-            recordButton.isEnabled = false
-            stopRecordingButton.isEnabled = true
-            startRecordingLabel.text = "Recording in Progress"
-        } else {
-            recordButton.isEnabled = true
-            stopRecordingButton.isEnabled = false
-            startRecordingLabel.text = "Tap to Record"
-        }
+        
+        recordButton.isEnabled = !isRecording
+        stopRecordingButton.isEnabled = isRecording
+        startRecordingLabel.text = isRecording ? "Recording in Progress" : "Tap to Record"
+        
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
             performSegue(withIdentifier: "stopRecording", sender: recorder.url)
         } else {
-            print("Audio recording was not successful.")
+            let alert = UIAlertController(title: "Audio Recording", message: "Audio recording was not successful, please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
