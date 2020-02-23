@@ -3,9 +3,6 @@
 An iPhone app that allows users to record their voice and then modulates the recorded audio to sound like a Chipmunk or Darth Vader.
 This app also lets the user speed up or slow down the rate of playback, and experience fun echo and reverb effects.
 
-The application renders it's user interface programmatically using `AutoLayout`. The user interface is dynamically 
-generated based on the specifications of the JSON file.
-
 ### How to run(installation):
 
 * Clone this repository.
